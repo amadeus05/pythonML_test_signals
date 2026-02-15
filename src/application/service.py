@@ -62,6 +62,10 @@ class SignalBotService:
 
     def _process_cycle(self):
         for symbol in SYMBOLS:
+            msg = f"🔍 Starting analysis for {symbol}..."
+            logger.info(msg)
+            self.notifier.send_message(msg)
+            
             # 1. Получаем свечи основного ТФ
             klines = self.exchange.get_latest_klines(symbol, TIMEFRAME)
             if not klines: continue

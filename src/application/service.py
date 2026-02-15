@@ -24,6 +24,9 @@ class SignalBotService:
         logger.info("✅ Successfully connected to Binance Sockets")
         self.notifier.send_message("🤖 Bot started and monitoring markets...")
         
+        retry_delay = 5 # Начальная задержка 5 секунд
+        max_delay = 60  # Максимальная задержка 60 секунд
+        
         while True:
             try:
                 # 1. Ждем закрытия следующей свечи
@@ -31,9 +34,16 @@ class SignalBotService:
                 
                 # 2. Обрабатываем цикл анализа
                 self._process_cycle()
+                
+                # Сброс задержки при успешном цикле
+                retry_delay = 5
+                
             except Exception as e:
-                logger.error(f"Error in main loop: {e}", exc_info=True)
-                time.sleep(10) # Защита от бесконечного быстрого цикла при ошибках
+                logger.error(f"Error in main loop: {e}. Reconnecting in {retry_delay}s...")
+                time.sleep(retry_delay)
+                
+                # Экспоненциальное увеличение задержки
+                retry_delay = min(retry_delay * 2, max_delay)
 
     def _wait_for_next_candle(self):
         from config import TF_MS

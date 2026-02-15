@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 from catboost import CatBoostClassifier
-from dump_core.config import *
+from config import *
 
 # === НАСТРОЙКИ ФЬЮЧЕРСОВ ===
 TAKER_COM = 0.0004  # комиссия Taker Binance Futures

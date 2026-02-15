@@ -1,10 +1,14 @@
+from dotenv import load_dotenv
+load_dotenv() # Load environment variables before other imports
+
 import logging
 import threading
 from flask import Flask
-from dotenv import load_dotenv
 import os
-
-load_dotenv() # Load environment variables from .env file
+from src.infrastructure.exchange import BinanceExchange
+from src.infrastructure.notifier import TelegramNotifier
+from src.infrastructure.generator import MLSignalGenerator
+from src.application.service import SignalBotService
 
 # Setup logging
 logging.basicConfig(

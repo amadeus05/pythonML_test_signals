@@ -24,6 +24,7 @@ CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", 0.65))
 TP_PCT = float(os.getenv("TP_PCT", 0.030))
 SL_PCT = float(os.getenv("SL_PCT", 0.015))
 RISK_PER_TRADE = float(os.getenv("RISK_PER_TRADE", 0.01))
+POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", 10))
 
 # Интервалы в миллисекундах
 TF_MS = {

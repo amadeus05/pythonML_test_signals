@@ -6,7 +6,7 @@ import sqlite3
 import logging
 import time
 from datetime import datetime
-from dump_core.config import *
+from config import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

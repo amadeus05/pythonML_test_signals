@@ -21,6 +21,7 @@ class SignalBotService:
 
     def run(self):
         logger.info("Starting Signal Bot Service...")
+        logger.info("✅ Successfully connected to Binance Sockets")
         self.notifier.send_message("🤖 Bot started and monitoring markets...")
         
         while True:

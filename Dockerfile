@@ -1,5 +1,5 @@
-# Используем Python 3.11-slim для стабильности и небольшого размера образа
-FROM python:3.11-slim
+# Используем Python 3.12-slim для совместимости с pandas-ta и небольшого размера образа
+FROM python:3.12-slim
 
 # Устанавливаем системные зависимости, если понадобятся (например, для компиляции некоторых пакетов)
 RUN apt-get update && apt-get install -y --no-install-recommends \

@@ -1,0 +1,10 @@
+requests
+pandas
+pandas_ta
+numpy
+catboost
+flask
+gunicorn
+matplotlib
+scikit-learn
+python-dotenv

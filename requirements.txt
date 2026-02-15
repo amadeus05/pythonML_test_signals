@@ -1,13 +1,10 @@
-requests>=2.31
-pandas>=2.2.2
-numpy>=1.26,<2.1               # важно: <2.1, чтобы numba 0.61–0.63 не ругался
-pandas_ta>=0.3.14b0            # или просто pandas_ta без версии — возьмёт свежую
-catboost>=1.2
-flask>=3.0
-gunicorn>=22.0
-matplotlib>=3.8
-scikit-learn>=1.4
-python-dotenv>=1.0
-
-# если pandas_ta всё равно тянет старую numba — можно явно указать
-numba>=0.63.0            # 0.63.x уже поддерживает даже 3.14, на 3.11 тем более
+requests
+pandas
+pandas_ta
+numpy
+catboost
+flask
+gunicorn
+matplotlib
+scikit-learn
+python-dotenv

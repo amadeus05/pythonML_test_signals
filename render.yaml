@@ -1,15 +1,12 @@
 services:
   - type: web
     name: nerv-ml-signals-bot
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python run_bot.py
+    env: docker
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: TG_TOKEN
         sync: false
       - key: TG_CHAT_ID
         sync: false
       - key: PORT
         value: 8000
+

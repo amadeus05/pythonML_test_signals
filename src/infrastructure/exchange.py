@@ -7,7 +7,7 @@ from config import BASE_URL
 logger = logging.getLogger(__name__)
 
 class BinanceExchange(ExchangeInterface):
-    def get_latest_klines(self, symbol: str, timeframe: str, limit: int = 400) -> List[KlineDTO]:
+    def get_latest_klines(self, symbol: str, timeframe: str, limit: int = 1500) -> List[KlineDTO]:
         """
         Fetched Klines from Binance Futures API.
         """

@@ -29,11 +29,11 @@ class SignalBotService:
         
         while True:
             try:
-                # 1. Ждем закрытия следующей свечи
-                self._wait_for_next_candle()
-                
-                # 2. Обрабатываем цикл анализа
+                # 1. Сначала запускаем анализ (сразу при старте)
                 self._process_cycle()
+                
+                # 2. Затем ждем закрытия следующей свечи
+                self._wait_for_next_candle()
                 
                 # Сброс задержки при успешном цикле
                 retry_delay = 5
@@ -62,10 +62,6 @@ class SignalBotService:
 
     def _process_cycle(self):
         for symbol in SYMBOLS:
-            msg = f"🔍 Starting analysis for {symbol}..."
-            logger.info(msg)
-            self.notifier.send_message(msg)
-            
             # 1. Получаем свечи основного ТФ
             klines = self.exchange.get_latest_klines(symbol, TIMEFRAME)
             if not klines: continue
@@ -93,7 +89,7 @@ class SignalBotService:
             signal = self.generator.generate_signal(symbol, df, htf_df)
             
             if signal:
-                logger.info(f"🔥 SIGNAL FOUND: {symbol} {signal.side}")
+                logger.info(f"SIGNAL FOUND: {symbol} {signal.side}")
                 self.notifier.send_signal(signal)
             else:
                 logger.info(f"Neutral for {symbol}")

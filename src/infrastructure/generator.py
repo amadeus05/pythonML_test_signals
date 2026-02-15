@@ -1,3 +1,4 @@
+import logging
 import pandas as pd
 import numpy as np
 import pickle
@@ -6,6 +7,8 @@ from catboost import CatBoostClassifier
 from src.domain.contracts import SignalGeneratorInterface, SignalDTO, SignalSide
 from config import MODELS_DIR, CONFIDENCE_THRESHOLD, SL_PCT, TP_PCT
 from etl_pipeline import add_features, add_htf_features
+
+logger = logging.getLogger(__name__)
 
 class MLSignalGenerator(SignalGeneratorInterface):
     def __init__(self):
@@ -21,6 +24,7 @@ class MLSignalGenerator(SignalGeneratorInterface):
         df = add_htf_features(df, htf_df)
         
         if df.empty:
+            logger.warning(f"Empty DataFrame after feature generation for {symbol}")
             return None
             
         current_row = df.iloc[[-1]] # Последняя закрытая свеча
@@ -34,6 +38,8 @@ class MLSignalGenerator(SignalGeneratorInterface):
             p_short, p_long = probs
         else:
             p_short, p_neutral, p_long = probs
+            
+        logger.info(f"Analysis results for {symbol}: LONG: {p_long:.2%}, SHORT: {p_short:.2%}, NEUTRAL: {p_neutral:.2%} (Threshold: {CONFIDENCE_THRESHOLD})")
             
         side = SignalSide.NEUTRAL
         confidence = 0.0

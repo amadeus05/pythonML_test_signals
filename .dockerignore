@@ -12,7 +12,6 @@ README.md
 Dockerfile
 render.yaml
 Procfile
-models/
 data/
 *.db
 *.log
